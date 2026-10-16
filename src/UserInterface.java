@@ -6,7 +6,7 @@ public class UserInterface {
 
     public UserInterface(Scanner scanner){
         this.scan = scanner;
-        studentManager = new StudentManager();
+        studentManager = new StudentManager("students.txt");
     }
 
     public void start(){
@@ -32,7 +32,11 @@ public class UserInterface {
                 int studentId = Integer.valueOf(scan.nextLine());
                 System.out.println("Enter Student Email: ");
                 String email = scan.nextLine();
-                studentManager.addStudent(new Student(name, studentId, email));
+                if(studentManager.addStudent(new Student(name, studentId, email))){
+                    System.out.println("Student added successfully.");
+                }else{
+                    System.out.println("A student with ID: " + studentId + " already exists.");
+                }
             }
 
             if(command.equals("update")){
